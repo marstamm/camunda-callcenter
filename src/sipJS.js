@@ -1,5 +1,10 @@
 import { SimpleUser } from "sip.js/lib/platform/web";
 
+// create audio element
+var audio = document.createElement('audio');
+audio.id = 'remoteAudio';
+document.body.appendChild(audio);
+
 
 // Helper function to get an HTML audio element
 function getAudioElement(id) {
@@ -18,7 +23,6 @@ async function wait(ms) {
 // Main function
 async function main() {
     const server = "wss://127.0.0.1:8089/ws";
-    const destination = "sip:100@127.0.0.1";
     const aor = "sip:1060@127.0.0.1";
     const authorizationUsername = '1060';
     const authorizationPassword = 'password';
@@ -44,17 +48,16 @@ async function main() {
     await simpleUser.connect();
     // Register to receive inbound calls (optional)
     await simpleUser.register();
-    // Place call to the destination
 
-    console.warn('calling');
+    window.call = async (number) => {
+        console.warn(`calling sip:${number}@127.0.0.1`);
+        await simpleUser.call(`sip:${number}@127.0.0.1`);
+    }
 
-    await simpleUser.call(destination);
-    // Wait some number of milliseconds
-    await wait(5000);
-
-    // Hangup call
-    // console.warn('hangup');
-    // await simpleUser.hangup();
+    window.hangup = async () => {
+        console.warn('hangup');
+        await simpleUser.hangup();    
+    }
 }
 // Run it
 main()

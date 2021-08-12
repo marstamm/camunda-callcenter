@@ -1,0 +1,45 @@
+<form>
+  <script cam-script type="text/form-script">
+    var variableManager = camForm.variableManager;
+    var button = document.getElementById('call_button');
+    var inCall = false;
+    var number;
+    camForm.on('variables-fetched', function() {
+      // access to all process variables after the form has loaded
+      console.log(variableManager.variables);
+      number = variableManager.variables['phone_number'].value;
+      button.disabled = false;
+    });
+
+    button.addEventListener('click', ev => {
+      if(inCall) {
+        window.hangup();
+        button.innerText = "Call";
+      } else {
+        window.call(number);
+        button.innerText = "Hang up";
+      }
+    
+      inCall = !inCall
+    })
+  </script>
+
+  <div class="control-group">
+    <label class="control-label">Customer Name</label>
+    <div class="controls">
+      <input type="text"
+      cam-variable-name="customer_name"
+      cam-variable-type="String"
+      readonly="true"
+      class="form-control" />
+    </div>
+  </div>
+
+  <input type="hidden"
+    cam-variable-name="phone_number"
+    cam-variable-type="String" />
+
+  <div class="control-group">
+    <button id="call_button" class="btn btn-default" disabled>Call</button>
+  </div>
+</form>

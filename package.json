@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jssip": "^3.8.0",
     "sip.js": "^0.20.0"
   },
   "devDependencies": {
