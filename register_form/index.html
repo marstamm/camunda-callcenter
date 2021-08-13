@@ -1,0 +1,65 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .container {
+      margin-top: 50px;
+      border: 1px solid lightgray;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<div class="ui container" id="step-1">
+  <img src="./help-desk.svg" />
+  <h1>Get help for your device</h1>
+
+  <form autocomplete="off" class="ui form" id="phoneSubmit">
+    <div class="field">
+      <input type="text" placeholder="You Name" name="name">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="What is you question?" name="question">
+    </div>
+    <div class="field">
+      <input type="text" placeholder="Phone number" name="phone" autocomplete="true">
+    </div>
+    <button class="ui button">Call me now</button>
+  </form>
+</div>
+
+<div class="ui container" id="step-2" style="display: none;">
+  <img src="./message_sent.svg" />
+  <h1 style="text-align: center;">We will call you now, keep your phone ready!</h1>
+</div>
+
+<script>
+  document.getElementById('phoneSubmit').addEventListener('submit', ev => {
+    ev.preventDefault();
+    
+    const elements = ev.target.elements;
+    const body = {
+      variables: {
+        name: {value: elements['name'].value, type: 'String'},
+        phone: {value: elements['phone'].value, type: 'String'},
+        question: {value: elements['question'].value, type: 'String'}
+      }
+    }
+
+    fetch('/engine-rest/process-definition/key/callback-process/start', {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify(body) // body data type must match "Content-Type" header
+    }).then(res => {
+      document.getElementById('step-1').style.display = 'none';
+      document.getElementById('step-2').style.display = 'block';
+    });
+  })
+</script>

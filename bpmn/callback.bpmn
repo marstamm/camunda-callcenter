@@ -4,17 +4,9 @@
     <bpmn:startEvent id="StartEvent_1" name="Request for Callback received">
       <bpmn:outgoing>Flow_126g0am</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_126g0am" sourceRef="StartEvent_1" targetRef="Event_0ts77l4" />
-    <bpmn:intermediateCatchEvent id="Event_0ts77l4">
+    <bpmn:sequenceFlow id="Flow_126g0am" sourceRef="StartEvent_1" targetRef="Activity_0dsjeva" />
+    <bpmn:userTask id="Activity_0dsjeva" name="Call User" camunda:formKey="embedded:deployment:form.html" camunda:assignee="demo">
       <bpmn:incoming>Flow_126g0am</bpmn:incoming>
-      <bpmn:outgoing>Flow_01vcp5b</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_1thyzh1">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT0S</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_01vcp5b" sourceRef="Event_0ts77l4" targetRef="Activity_0dsjeva" />
-    <bpmn:userTask id="Activity_0dsjeva" name="Call User" camunda:formKey="embedded:deployment:form.html">
-      <bpmn:incoming>Flow_01vcp5b</bpmn:incoming>
       <bpmn:outgoing>Flow_1vjdtun</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="Event_0iz4kmf" name="Call Finished">
@@ -24,17 +16,13 @@
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="callback-process">
+      <bpmndi:BPMNEdge id="Flow_1vjdtun_di" bpmnElement="Flow_1vjdtun">
+        <di:waypoint x="420" y="117" />
+        <di:waypoint x="532" y="117" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_126g0am_di" bpmnElement="Flow_126g0am">
         <di:waypoint x="215" y="117" />
-        <di:waypoint x="272" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_01vcp5b_di" bpmnElement="Flow_01vcp5b">
-        <di:waypoint x="308" y="117" />
-        <di:waypoint x="370" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1vjdtun_di" bpmnElement="Flow_1vjdtun">
-        <di:waypoint x="470" y="117" />
-        <di:waypoint x="532" y="117" />
+        <di:waypoint x="320" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -42,11 +30,8 @@
           <dc:Bounds x="154" y="142" width="87" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0ke13af_di" bpmnElement="Event_0ts77l4">
-        <dc:Bounds x="272" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_008dkz6_di" bpmnElement="Activity_0dsjeva">
-        <dc:Bounds x="370" y="77" width="100" height="80" />
+        <dc:Bounds x="320" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0iz4kmf_di" bpmnElement="Event_0iz4kmf">
         <dc:Bounds x="532" y="99" width="36" height="36" />

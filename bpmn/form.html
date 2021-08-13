@@ -1,4 +1,4 @@
-<form>
+<form class="form-horizontal">
   <script cam-script type="text/form-script">
     var variableManager = camForm.variableManager;
     var button = document.getElementById('call_button');
@@ -7,7 +7,7 @@
     camForm.on('variables-fetched', function() {
       // access to all process variables after the form has loaded
       console.log(variableManager.variables);
-      number = variableManager.variables['phone_number'].value;
+      number = variableManager.variables['phone'].value;
       button.disabled = false;
     });
 
@@ -28,7 +28,18 @@
     <label class="control-label">Customer Name</label>
     <div class="controls">
       <input type="text"
-      cam-variable-name="customer_name"
+      cam-variable-name="name"
+      cam-variable-type="String"
+      readonly="true"
+      class="form-control" />
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label">Question</label>
+    <div class="controls">
+      <input type="text"
+      cam-variable-name="question"
       cam-variable-type="String"
       readonly="true"
       class="form-control" />
@@ -36,10 +47,13 @@
   </div>
 
   <input type="hidden"
-    cam-variable-name="phone_number"
+    cam-variable-name="phone"
     cam-variable-type="String" />
 
+  <br>
   <div class="control-group">
-    <button id="call_button" class="btn btn-default" disabled>Call</button>
+    <div class="controls">
+      <button id="call_button" class="btn btn-default" disabled>Call</button>
+    </div>
   </div>
 </form>
